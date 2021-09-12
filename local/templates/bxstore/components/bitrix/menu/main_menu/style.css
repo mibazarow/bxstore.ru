@@ -6,6 +6,9 @@
   .main_menu li {
     display: inline-block; }
   .main_menu a {
-    padding: 10px; }
+    color: var(--color3);
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 15px; }
 
 /*# sourceMappingURL=style.css.map */

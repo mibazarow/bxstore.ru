@@ -30,7 +30,7 @@ $APPLICATION->ShowPanel();
     <div class="header">
         <div class="header_logo">
             <a href="/">
-                <img src="<?= SITE_TEMPLATE_PATH ?>/img/logo.png" alt="Магазин вязанных игрушек">
+                <img src="<?= SITE_TEMPLATE_PATH ?>/img/logo.png" alt="">
             </a>
         </div>
         <div class="header_content">
@@ -49,7 +49,14 @@ $APPLICATION->ShowPanel();
                     "PAGE" => "#SITE_DIR#search/index.php",    // Страница выдачи результатов поиска (доступен макрос #SITE_DIR#)
                     "CATEGORY_0_TITLE" => "",    // Название категории
                     "CATEGORY_0" => array(    // Ограничение области поиска
-                        0 => "all",
+                        0 => "iblock_knit_shop",
+                    ),
+                    "COMPONENT_TEMPLATE" => ".default",
+                    "SHOW_INPUT" => "Y",    // Показывать форму ввода поискового запроса
+                    "INPUT_ID" => "title-search-input",    // ID строки ввода поискового запроса
+                    "CONTAINER_ID" => "title-search",    // ID контейнера, по ширине которого будут выводиться результаты
+                    "CATEGORY_0_iblock_knit_shop" => array(    // Искать в информационных блоках типа "iblock_knit_shop"
+                        0 => "4",
                     )
                 ),
                     false
@@ -75,16 +82,35 @@ $APPLICATION->ShowPanel();
             </div>
         </div>
         <div class="header_cart">
-            <a href="/">Выйти</a>
-            <? // Ссылка на корзину
-            $APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "small_basket", array(),
+            <a class="header_cart_auth" href="#">
+                <svg>
+                    <use xlink:href="#power-button"></use>
+                </svg>
+                Войти
+            </a>
+            <?
+            $APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "small_basket", array(
+                "COMPONENT_TEMPLATE" => ".default",
+                "PATH_TO_BASKET" => SITE_DIR . "personal/cart/",    // Страница корзины
+                "PATH_TO_ORDER" => SITE_DIR . "personal/order/make/",    // Страница оформления заказа
+                "SHOW_NUM_PRODUCTS" => "Y",    // Показывать количество товаров
+                "SHOW_TOTAL_PRICE" => "Y",    // Показывать общую сумму по товарам
+                "SHOW_EMPTY_VALUES" => "Y",    // Выводить нулевые значения в пустой корзине
+                "SHOW_PERSONAL_LINK" => "Y",    // Отображать персональный раздел
+                "PATH_TO_PERSONAL" => SITE_DIR . "personal/",    // Страница персонального раздела
+                "SHOW_AUTHOR" => "N",    // Добавить возможность авторизации
+                "PATH_TO_AUTHORIZE" => "",    // Страница авторизации
+                "SHOW_REGISTRATION" => "Y",    // Добавить возможность регистрации
+                "PATH_TO_REGISTER" => SITE_DIR . "login/",    // Страница регистрации
+                "PATH_TO_PROFILE" => SITE_DIR . "personal/",    // Страница профиля
+                "SHOW_PRODUCTS" => "N",    // Показывать список товаров
+                "POSITION_FIXED" => "N",    // Отображать корзину поверх шаблона
+                "HIDE_ON_BASKET_PAGES" => "N",    // Не показывать на страницах корзины и оформления заказа
+            ),
                 false
             ); ?>
         </div>
     </div>
 </div>
-
-
-
 
 
