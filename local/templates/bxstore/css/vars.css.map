@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,KAAM;EACJ,QAAQ,EAAE,OAAO;EACjB,QAAQ,EAAE,OAAO;EACjB,QAAQ,EAAE,OAAO;EACjB,QAAQ,EAAE,OAAO;EACjB,QAAQ,EAAE,OAAO;EACjB,QAAQ,EAAE,IAAI;;AAIhB;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;EAmCE",
+"sources": ["vars.scss"],
+"names": [],
+"file": "vars.css"
+}
