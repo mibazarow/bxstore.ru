@@ -26,7 +26,7 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 			ctx.BXCallAllowed = true; // unlock form refresher
 		});
 
-		this.controls.scope = BX('bx-soa-order');
+		this.controls.scope = BX('order_form_div');
 
 		// user presses "add location" when he cannot find location in popup mode
 		BX.bindDelegate(this.controls.scope, 'click', {className: '-bx-popup-set-mode-add-loc'}, function(){
@@ -39,10 +39,10 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 				}
 			});
 
-			BX.prepend(input, BX('bx-soa-order'));
+			BX.prepend(input, BX('ORDER_FORM'));
 
 			ctx.BXCallAllowed = false;
-			BX.Sale.OrderAjaxComponent.sendRequest();
+			submitForm();
 		});
 	},
 
@@ -124,19 +124,16 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 						if(locPropId !== false){
 							BX.bindDebouncedChange(input, function(value){
 
-								var zipChangedNode = BX('ZIP_PROPERTY_CHANGED');
-								zipChangedNode && (zipChangedNode.value = 'Y');
-
 								input = null;
 								row = null;
 
 								if(BX.type.isNotEmptyString(value) && /^\s*\d+\s*$/.test(value) && value.length > 3){
 
-									ctx.getLocationsByZip(value, function(locationsData){
-										ctx.properties[locPropId].control.setValueByLocationIds(locationsData);
+									ctx.getLocationByZip(value, function(locationId){
+										ctx.properties[locPropId].control.setValueByLocationId(locationId);
 									}, function(){
 										try{
-											// ctx.properties[locPropId].control.clearSelected();
+											ctx.properties[locPropId].control.clearSelected(locationId);
 										}catch(e){}
 									});
 								}
@@ -237,10 +234,6 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 		}
 
 		this.BXCallAllowed = true;
-
-		//set location initialized flag and refresh region & property actual content
-		if (BX.Sale.OrderAjaxComponent)
-			BX.Sale.OrderAjaxComponent.locationsCompletion();
 	},
 
 	checkMode: function(propId, mode){
@@ -379,7 +372,7 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 			if(this.BXCallAllowed){
 
 				this.BXCallAllowed = false;
-				setTimeout(function(){BX.Sale.OrderAjaxComponent.sendRequest()}, 20);
+				submitForm();
 			}
 
 		}
@@ -405,7 +398,7 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 
 		return false;
 	},
-	getLocationsByZip: function(value, successCallback, notFoundCallback)
+	getLocationByZip: function(value, successCallback, notFoundCallback)
 	{
 		if(typeof this.indexCache[value] != 'undefined')
 		{
@@ -413,9 +406,12 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 			return;
 		}
 
+		ShowWaitWindow();
+
 		var ctx = this;
 
 		BX.ajax({
+
 			url: this.options.source,
 			method: 'post',
 			dataType: 'json',
@@ -423,22 +419,28 @@ BX.saleOrderAjax = { // bad solution, actually, a singleton at the page
 			processData: true,
 			emulateOnload: true,
 			start: true,
-			data: {'ACT': 'GET_LOCS_BY_ZIP', 'ZIP': value},
+			data: {'ACT': 'GET_LOC_BY_ZIP', 'ZIP': value},
 			//cache: true,
 			onsuccess: function(result){
-				if(result.result)
-				{
-					ctx.indexCache[value] = result.data;
-					successCallback.apply(ctx, [result.data]);
-				}
-				else
-				{
+
+				CloseWaitWindow();
+				if(result.result){
+
+					ctx.indexCache[value] = result.data.ID;
+
+					successCallback.apply(ctx, [result.data.ID]);
+
+				}else
 					notFoundCallback.call(ctx);
-				}
+
 			},
 			onfailure: function(type, e){
+
+				CloseWaitWindow();
 				// on error do nothing
 			}
+
 		});
 	}
-};
+
+}
