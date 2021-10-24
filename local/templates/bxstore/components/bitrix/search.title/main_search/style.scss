@@ -1,0 +1,33 @@
+.header_search {
+  height: 48px;
+  width: 100%;
+  background: #fff;
+  border: 1px #ddd solid;
+  border-radius: 5px;
+
+  form {
+   justify-content: space-between;
+    display: flex;
+  }
+
+  input {
+    border:none;
+    background: none;
+    height: 48px;
+    width: calc(100% - 50px);
+  }
+
+  button {
+    width: 48px;
+    height: 48px;
+    background: none;
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}

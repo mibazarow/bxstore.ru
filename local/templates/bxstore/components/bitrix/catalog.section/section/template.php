@@ -149,7 +149,7 @@ $containerName = 'container-'.$navParams['NavNum'];
 				{
 					$rowItems = array_splice($arResult['ITEMS'], 0, $rowData['COUNT']);
 					?>
-					<div data-entity="items-row">
+					<div class="catalog_row" data-entity="items-row">
 						<?
 						switch ($rowData['VARIANT'])
 						{
@@ -159,7 +159,7 @@ $containerName = 'container-'.$navParams['NavNum'];
 								foreach ($rowItems as $item)
 								{
 									?>
-									<div>
+									<div class="catalog_row_item">
 										<?
 										$APPLICATION->IncludeComponent(
 											'bitrix:catalog.item',

@@ -1,0 +1,9 @@
+.catalog_row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0px -15px; }
+  .catalog_row_item {
+    width: 33.3333333333%;
+    padding: 0px 15px; }
+
+/*# sourceMappingURL=style.css.map */

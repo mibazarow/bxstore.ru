@@ -1,3 +1,32 @@
+.product_row {
+  padding: 20px;
+  background: #fff;
+  border-radius: var(--radius);
+  display: flex; }
+  .product_row_images {
+    width: 50%;
+    display: flex; }
+    .product_row_images_dop {
+      width: 100px;
+      display: flex;
+      flex-direction: column; }
+      .product_row_images_dop a {
+        margin-bottom: 15px; }
+      .product_row_images_dop img {
+        width: 100%; }
+    .product_row_images_main {
+      width: calc(100% - 100px); }
+      .product_row_images_main img {
+        width: 100%; }
+  .product_row_content {
+    width: 50%; }
 
+.prodict_profits {
+  display: flex;
+  justify-content: space-between; }
+  .prodict_profits_profit {
+    width: 30%;
+    background: #ddd;
+    height: 100px; }
 
 /*# sourceMappingURL=style.css.map */

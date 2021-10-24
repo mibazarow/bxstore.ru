@@ -1,3 +1,20 @@
+.header_basket_item {
+  display: flex;
+  color: var(--color1);
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between; }
+  .header_basket_item svg {
+    width: 48px;
+    height: 48px; }
+  .header_basket_item span {
+    width: calc(100% - 58px); }
+  .header_basket_item i {
+    color: var(--color2);
+    display: block;
+    font-style: normal; }
 
+.bx-basket {
+  margin: 61px 0px 0px 15px; }
 
 /*# sourceMappingURL=style.css.map */

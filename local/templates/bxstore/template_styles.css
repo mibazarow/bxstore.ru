@@ -1,33 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
 body {
   font-family: 'PT Sans', sans-serif;
   font-size: 18px;
-  color: #333333; }
+  color: #333333;
+  background: #F9F9F9; }
+
+a {
+  color: var(--color3); }
+
+.container {
+  width: 100%;
+  max-width: 970px;
+  padding: 0px 15px;
+  margin: 0px auto; }
+  @media (max-width: 970px) {
+    .container {
+      max-width: 400px; } }
 
 .header {
   display: flex; }
   .header_logo {
     width: 117px; }
     .header_logo a {
+      margin-top: 25px;
       display: block; }
     .header_logo img {
       width: 100%; }
   .header_content {
     width: calc(100% - 117px - 190px); }
-    .header_content_row span {
+    .header_content_slogan {
       font-family: 'Pacifico', cursive;
       color: var(--color1);
       font-size: 29px;
       padding: 20px 0px;
       display: block;
       text-align: center; }
-    .header_content_row i {
-      font-style: normal;
-      color: var(--color2); }
+      .header_content_slogan i {
+        color: var(--color2);
+        font-style: normal; }
   .header_cart {
-    width: 190px; }
-    .header_cart_auth svg {
-      width: 20px;
-      height: 20px; }
+    width: 190px;
+    display: flex;
+    flex-direction: column; }
+    .header_cart_auth {
+      text-align: right;
+      color: var(--color4);
+      text-decoration: none;
+      font-size: 15px; }
+      .header_cart_auth svg {
+        position: relative;
+        bottom: -7px;
+        width: 25px;
+        height: 25px; }
+
+.content {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 200px; }
+  .content_left {
+    width: 300px;
+    height: 200px; }
+    .content_left img {
+      width: 100%;
+      border-radius: var(--radius); }
+  .content_right {
+    width: calc(100% - 330px); }
+  .content_socials {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; }
+    .content_socials li:nth-child(1) {
+      margin-right: 15px; }
+    .content_socials a {
+      text-decoration: none; }
+    .content_socials svg {
+      width: 25px;
+      height: 25px;
+      position: relative;
+      bottom: -8px;
+      margin-right: 5px; }
+  .content_main_page {
+    padding: 100px; }
 
 .footer {
   background: #444;

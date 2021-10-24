@@ -6,14 +6,12 @@ $CurUri = $APPLICATION->GetCurUri();
 <html lang="ru">
 <head>
     <?
-
     use Bitrix\Main\Page\Asset;
 
     // Пример подключения JS
-    Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/jquery-3.6.0.min.js');
+    Asset::getInstance()->addJs(SITE_TEMPLATE_PATH . '/js/jquery-3.6.0.js');
     // Пример подключения CSS
-    Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/vars.min.css');
-    Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/bootstrap-grid.min.css');
+    Asset::getInstance()->addCss(SITE_TEMPLATE_PATH . '/css/vars.css');
     $APPLICATION->ShowHead();
     ?>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -27,6 +25,7 @@ $APPLICATION->ShowPanel();
 
 
 <div class="container">
+
     <div class="header">
         <div class="header_logo">
             <a href="/">
@@ -34,10 +33,10 @@ $APPLICATION->ShowPanel();
             </a>
         </div>
         <div class="header_content">
-            <div class="header_content_row">
-                <span>Вязанные игрушки: <i>ручной работы</i></span>
+            <div class="header_content_slogan">
+              Вязанные игрушки: <i>ручной работы</i>
             </div>
-            <div class="header_content_row">
+
                 <? // Поиск по заголовкам - http://dev.1c-bitrix.ru/user_help/settings/search/components_2/search_title.php
                 $APPLICATION->IncludeComponent("bitrix:search.title", "main_search", array(
                     "NUM_CATEGORIES" => "1",    // Количество категорий поиска
@@ -61,8 +60,8 @@ $APPLICATION->ShowPanel();
                 ),
                     false
                 ); ?>
-            </div>
-            <div class="header_content_row">
+
+
                 <? $APPLICATION->IncludeComponent("bitrix:menu", "main_menu", array(
                     "ALLOW_MULTI_SELECT" => "N",    // Разрешить несколько активных пунктов одновременно
                     "CHILD_MENU_TYPE" => "left",    // Тип меню для остальных уровней
@@ -79,7 +78,7 @@ $APPLICATION->ShowPanel();
                 ),
                     false
                 ); ?>
-            </div>
+
         </div>
         <div class="header_cart">
             <a class="header_cart_auth" href="#">
@@ -111,6 +110,6 @@ $APPLICATION->ShowPanel();
             ); ?>
         </div>
     </div>
-</div>
+
 
 

@@ -4,20 +4,20 @@ use \Bitrix\Main;
 $this->setFrameMode(true);
 ?>
 
-<a href="<?=$arResult['ITEM']['DETAIL_PAGE_URL']?>" title="<?=$imgTitle?>" data-entity="image-wrapper">
+<a class="catalog_item_element" href="<?=$arResult['ITEM']['DETAIL_PAGE_URL']?>" title="<?=$imgTitle?>" data-entity="image-wrapper">
     <img src="<?=$arResult['ITEM']['PREVIEW_PICTURE']['SRC']?>" alt="">
-
-    <?=$arResult['ITEM']['NAME']?>
-
+    <strong><?=$arResult['ITEM']['NAME']?></strong>
+    <span>
     <?
     foreach ($arResult['ITEM']['ITEM_PRICES'] as $ITEM_PRICE) {
         echo $ITEM_PRICE['PRINT_PRICE'];
     }
     ?>
+        </span>
     <ul>
         <? foreach ($arResult['ITEM']['DISPLAY_PROPERTIES'] as $PROPERTY) { ?>
             <li>
-                <?= $PROPERTY['NAME'] ?>:
+                <i><?= $PROPERTY['NAME'] ?>:</i>
                 <? if (is_array($PROPERTY['VALUE'])) { ?>
                     <? echo implode(', ', $PROPERTY['VALUE']) ?>
                     <?

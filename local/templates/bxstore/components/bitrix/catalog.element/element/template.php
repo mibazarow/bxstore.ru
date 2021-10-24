@@ -85,70 +85,90 @@ $arParams['MESS_SHOW_MAX_QUANTITY'] = $arParams['MESS_SHOW_MAX_QUANTITY'] ?: Loc
 $arParams['MESS_RELATIVE_QUANTITY_MANY'] = $arParams['MESS_RELATIVE_QUANTITY_MANY'] ?: Loc::getMessage('CT_BCE_CATALOG_RELATIVE_QUANTITY_MANY');
 $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'] ?: Loc::getMessage('CT_BCE_CATALOG_RELATIVE_QUANTITY_FEW');
 ?>
-<div id="<?= $itemIds['ID'] ?>" itemscope itemtype="http://schema.org/Product">
+    <div class="product_row" id="<?= $itemIds['ID'] ?>" itemscope itemtype="http://schema.org/Product">
 
 
-    <div id="<?= $itemIds['BIG_SLIDER_ID'] ?>">
-        <div data-entity="images-container">
-            <img width="50" itemprop="image" src="<?= $arResult['DETAIL_PICTURE']['SRC'] ?>"
-                 alt="Купить <? echo $actualItem['NAME'] ?>">
-            <? if (count($arResult["MORE_PHOTO"]) > 0) {
-                foreach ($arResult["MORE_PHOTO"] as $PHOTO) {
-                    ?>
-                    <img width="50" src="<?= $PHOTO['SRC'] ?>" alt="<? echo $actualItem['NAME'] ?>">
-                <? }
-            } ?>
+        <div class="product_row_images" id="<?= $itemIds['BIG_SLIDER_ID'] ?>">
+
+            <div class="product_row_images_dop">
+                <? if (count($arResult["MORE_PHOTO"]) > 0) {
+                    foreach ($arResult["MORE_PHOTO"] as $PHOTO) {
+                        ?>
+                        <a href="#">
+                            <img src="<?= $PHOTO['SRC'] ?>" alt="<? echo $actualItem['NAME'] ?>">
+                        </a>
+                    <? }
+                } ?>
+            </div>
+            <div class="product_row_images_main" data-entity="images-container">
+                <img itemprop="image" src="<?= $arResult['DETAIL_PICTURE']['SRC'] ?>"
+                     alt="Купить <? echo $actualItem['NAME'] ?>">
+            </div>
+        </div>
+
+        <div class="product_row_content">
+            <h1><?=$arResult['NAME']?></h1>
+            <?
+            foreach ($arParams['PRODUCT_PAY_BLOCK_ORDER'] as $blockName) {
+                switch ($blockName) {
+                    case 'price':
+                        ?>
+                        <div class="product_row_content_price" id="<?= $itemIds['PRICE_ID'] ?>">
+                            <?
+                            foreach ($arResult['ITEM_PRICES'] as $ITEM_PRICE) {
+                                echo $ITEM_PRICE['PRINT_BASE_PRICE'];
+                            }
+                            ?>
+                        </div>
+                        <?php
+                        break;
+                    case 'buttons':
+                        ?>
+                        <div class="product_row_content_btn" data-entity="main-button-container">
+                            <div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>">
+                                <a id="<?= $itemIds['ADD_BASKET_LINK'] ?>" rel="nofollow" href="javascript:void(0);">
+                                    <?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?>
+                                </a>
+                            </div>
+                        </div>
+                        <?php
+                        break;
+                }
+            }
+            ?>
+            <ul class="product_row_content_props">
+                <? foreach ($arResult['DISPLAY_PROPERTIES'] as $PROPERTY) { ?>
+                    <li>
+                        <?= $PROPERTY['NAME'] ?>:
+                        <? if (is_array($PROPERTY['VALUE'])) { ?>
+                            <? echo implode(', ', $PROPERTY['VALUE']) ?>
+                            <?
+                        } else { ?>
+                            <?= $PROPERTY['VALUE'] ?>
+                            <?
+                        } ?>
+                    </li>
+                    <?
+                } ?>
+            </ul>
         </div>
     </div>
 
 
-    <?
-    foreach ($arParams['PRODUCT_PAY_BLOCK_ORDER'] as $blockName) {
-        switch ($blockName) {
-            case 'price':
-                ?>
-                <div id="<?= $itemIds['PRICE_ID'] ?>"><?= $price['PRINT_RATIO_PRICE'] ?></div>
-                <?php
-                break;
-            case 'buttons':
-                ?>
-                <div data-entity="main-button-container">
-                    <div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>">
-                        <a id="<?= $itemIds['ADD_BASKET_LINK'] ?>" rel="nofollow" href="javascript:void(0);">
-                            <?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?>
-                        </a>
-                    </div>
-                </div>
-                <?php
-                break;
-        }
-    }
-    ?>
 
+<div class="prodict_profits">
+    <div class="prodict_profits_profit"></div>
+    <div class="prodict_profits_profit"></div>
+    <div class="prodict_profits_profit"></div>
+</div>
 
-    <ul>
-        <? foreach ($arResult['DISPLAY_PROPERTIES'] as $PROPERTY) { ?>
-            <li>
-                <?= $PROPERTY['NAME'] ?>:
-                <? if (is_array($PROPERTY['VALUE'])) { ?>
-                    <? echo implode(', ', $PROPERTY['VALUE']) ?>
-                    <?
-                } else { ?>
-                    <?= $PROPERTY['VALUE'] ?>
-                    <?
-                } ?>
-            </li>
-            <?
-        } ?>
-    </ul>
-
-    <?= $arResult['DETAIL_TEXT'] ?>
+    <div class="product_text">
+        <?= $arResult['DETAIL_TEXT'] ?>
+    </div>
 
 
     <meta itemprop="name" content="<?= $name ?>"/>
     <meta itemprop="category" content="<?= $arResult['CATEGORY_PATH'] ?>"/>
-
-
     <span itemprop="offers" itemscope itemtype="http://schema.org/Offer">
 		<meta itemprop="price" content="<?= $price['RATIO_PRICE'] ?>"/>
 		<meta itemprop="priceCurrency" content="<?= $price['CURRENCY'] ?>"/>
@@ -156,73 +176,72 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
               href="http://schema.org/<?= ($actualItem['CAN_BUY'] ? 'InStock' : 'OutOfStock') ?>"/>
 	</span>
 
-    <?php
-
-    $emptyProductProperties = empty($arResult['PRODUCT_PROPERTIES']);
-    $jsParams = array(
-        'CONFIG' => array(
-            'USE_CATALOG' => $arResult['CATALOG'],
-            'SHOW_QUANTITY' => $arParams['USE_PRODUCT_QUANTITY'],
-            'SHOW_PRICE' => !empty($arResult['ITEM_PRICES']),
-            'SHOW_DISCOUNT_PERCENT' => $arParams['SHOW_DISCOUNT_PERCENT'] === 'Y',
-            'SHOW_OLD_PRICE' => $arParams['SHOW_OLD_PRICE'] === 'Y',
-            'USE_PRICE_COUNT' => $arParams['USE_PRICE_COUNT'],
-            'DISPLAY_COMPARE' => $arParams['DISPLAY_COMPARE'],
-            'MAIN_PICTURE_MODE' => $arParams['DETAIL_PICTURE_MODE'],
-            'ADD_TO_BASKET_ACTION' => $arParams['ADD_TO_BASKET_ACTION'],
-            'SHOW_CLOSE_POPUP' => $arParams['SHOW_CLOSE_POPUP'] === 'Y',
-            'SHOW_MAX_QUANTITY' => $arParams['SHOW_MAX_QUANTITY'],
-            'RELATIVE_QUANTITY_FACTOR' => $arParams['RELATIVE_QUANTITY_FACTOR'],
-            'TEMPLATE_THEME' => $arParams['TEMPLATE_THEME'],
-            'USE_STICKERS' => true,
-            'USE_SUBSCRIBE' => $showSubscribe,
-            'SHOW_SLIDER' => $arParams['SHOW_SLIDER'],
-            'SLIDER_INTERVAL' => $arParams['SLIDER_INTERVAL'],
-            'ALT' => $alt,
-            'TITLE' => $title,
-            'MAGNIFIER_ZOOM_PERCENT' => 200,
-            'USE_ENHANCED_ECOMMERCE' => $arParams['USE_ENHANCED_ECOMMERCE'],
-            'DATA_LAYER_NAME' => $arParams['DATA_LAYER_NAME'],
-            'BRAND_PROPERTY' => !empty($arResult['DISPLAY_PROPERTIES'][$arParams['BRAND_PROPERTY']])
-                ? $arResult['DISPLAY_PROPERTIES'][$arParams['BRAND_PROPERTY']]['DISPLAY_VALUE']
-                : null
-        ),
-        'VISUAL' => $itemIds,
-        'PRODUCT_TYPE' => $arResult['PRODUCT']['TYPE'],
-        'PRODUCT' => array(
-            'ID' => $arResult['ID'],
-            'ACTIVE' => $arResult['ACTIVE'],
-            'PICT' => reset($arResult['MORE_PHOTO']),
-            'NAME' => $arResult['~NAME'],
-            'SUBSCRIPTION' => true,
-            'ITEM_PRICE_MODE' => $arResult['ITEM_PRICE_MODE'],
-            'ITEM_PRICES' => $arResult['ITEM_PRICES'],
-            'ITEM_PRICE_SELECTED' => $arResult['ITEM_PRICE_SELECTED'],
-            'ITEM_QUANTITY_RANGES' => $arResult['ITEM_QUANTITY_RANGES'],
-            'ITEM_QUANTITY_RANGE_SELECTED' => $arResult['ITEM_QUANTITY_RANGE_SELECTED'],
-            'ITEM_MEASURE_RATIOS' => $arResult['ITEM_MEASURE_RATIOS'],
-            'ITEM_MEASURE_RATIO_SELECTED' => $arResult['ITEM_MEASURE_RATIO_SELECTED'],
-            'SLIDER_COUNT' => $arResult['MORE_PHOTO_COUNT'],
-            'SLIDER' => $arResult['MORE_PHOTO'],
-            'CAN_BUY' => $arResult['CAN_BUY'],
-            'CHECK_QUANTITY' => $arResult['CHECK_QUANTITY'],
-            'QUANTITY_FLOAT' => is_float($arResult['ITEM_MEASURE_RATIOS'][$arResult['ITEM_MEASURE_RATIO_SELECTED']]['RATIO']),
-            'MAX_QUANTITY' => $arResult['PRODUCT']['QUANTITY'],
-            'STEP_QUANTITY' => $arResult['ITEM_MEASURE_RATIOS'][$arResult['ITEM_MEASURE_RATIO_SELECTED']]['RATIO'],
-            'CATEGORY' => $arResult['CATEGORY_PATH']
-        ),
-        'BASKET' => array(
-            'ADD_PROPS' => $arParams['ADD_PROPERTIES_TO_BASKET'] === 'Y',
-            'QUANTITY' => $arParams['PRODUCT_QUANTITY_VARIABLE'],
-            'PROPS' => $arParams['PRODUCT_PROPS_VARIABLE'],
-            'EMPTY_PROPS' => $emptyProductProperties,
-            'BASKET_URL' => $arParams['BASKET_URL'],
-            'ADD_URL_TEMPLATE' => $arResult['~ADD_URL_TEMPLATE'],
-            'BUY_URL_TEMPLATE' => $arResult['~BUY_URL_TEMPLATE']
-        )
-    );
-    unset($emptyProductProperties);
-    ?>
+<?php
+$emptyProductProperties = empty($arResult['PRODUCT_PROPERTIES']);
+$jsParams = array(
+    'CONFIG' => array(
+        'USE_CATALOG' => $arResult['CATALOG'],
+        'SHOW_QUANTITY' => $arParams['USE_PRODUCT_QUANTITY'],
+        'SHOW_PRICE' => !empty($arResult['ITEM_PRICES']),
+        'SHOW_DISCOUNT_PERCENT' => $arParams['SHOW_DISCOUNT_PERCENT'] === 'Y',
+        'SHOW_OLD_PRICE' => $arParams['SHOW_OLD_PRICE'] === 'Y',
+        'USE_PRICE_COUNT' => $arParams['USE_PRICE_COUNT'],
+        'DISPLAY_COMPARE' => $arParams['DISPLAY_COMPARE'],
+        'MAIN_PICTURE_MODE' => $arParams['DETAIL_PICTURE_MODE'],
+        'ADD_TO_BASKET_ACTION' => $arParams['ADD_TO_BASKET_ACTION'],
+        'SHOW_CLOSE_POPUP' => $arParams['SHOW_CLOSE_POPUP'] === 'Y',
+        'SHOW_MAX_QUANTITY' => $arParams['SHOW_MAX_QUANTITY'],
+        'RELATIVE_QUANTITY_FACTOR' => $arParams['RELATIVE_QUANTITY_FACTOR'],
+        'TEMPLATE_THEME' => $arParams['TEMPLATE_THEME'],
+        'USE_STICKERS' => true,
+        'USE_SUBSCRIBE' => $showSubscribe,
+        'SHOW_SLIDER' => $arParams['SHOW_SLIDER'],
+        'SLIDER_INTERVAL' => $arParams['SLIDER_INTERVAL'],
+        'ALT' => $alt,
+        'TITLE' => $title,
+        'MAGNIFIER_ZOOM_PERCENT' => 200,
+        'USE_ENHANCED_ECOMMERCE' => $arParams['USE_ENHANCED_ECOMMERCE'],
+        'DATA_LAYER_NAME' => $arParams['DATA_LAYER_NAME'],
+        'BRAND_PROPERTY' => !empty($arResult['DISPLAY_PROPERTIES'][$arParams['BRAND_PROPERTY']])
+            ? $arResult['DISPLAY_PROPERTIES'][$arParams['BRAND_PROPERTY']]['DISPLAY_VALUE']
+            : null
+    ),
+    'VISUAL' => $itemIds,
+    'PRODUCT_TYPE' => $arResult['PRODUCT']['TYPE'],
+    'PRODUCT' => array(
+        'ID' => $arResult['ID'],
+        'ACTIVE' => $arResult['ACTIVE'],
+        'PICT' => reset($arResult['MORE_PHOTO']),
+        'NAME' => $arResult['~NAME'],
+        'SUBSCRIPTION' => true,
+        'ITEM_PRICE_MODE' => $arResult['ITEM_PRICE_MODE'],
+        'ITEM_PRICES' => $arResult['ITEM_PRICES'],
+        'ITEM_PRICE_SELECTED' => $arResult['ITEM_PRICE_SELECTED'],
+        'ITEM_QUANTITY_RANGES' => $arResult['ITEM_QUANTITY_RANGES'],
+        'ITEM_QUANTITY_RANGE_SELECTED' => $arResult['ITEM_QUANTITY_RANGE_SELECTED'],
+        'ITEM_MEASURE_RATIOS' => $arResult['ITEM_MEASURE_RATIOS'],
+        'ITEM_MEASURE_RATIO_SELECTED' => $arResult['ITEM_MEASURE_RATIO_SELECTED'],
+        'SLIDER_COUNT' => $arResult['MORE_PHOTO_COUNT'],
+        'SLIDER' => $arResult['MORE_PHOTO'],
+        'CAN_BUY' => $arResult['CAN_BUY'],
+        'CHECK_QUANTITY' => $arResult['CHECK_QUANTITY'],
+        'QUANTITY_FLOAT' => is_float($arResult['ITEM_MEASURE_RATIOS'][$arResult['ITEM_MEASURE_RATIO_SELECTED']]['RATIO']),
+        'MAX_QUANTITY' => $arResult['PRODUCT']['QUANTITY'],
+        'STEP_QUANTITY' => $arResult['ITEM_MEASURE_RATIOS'][$arResult['ITEM_MEASURE_RATIO_SELECTED']]['RATIO'],
+        'CATEGORY' => $arResult['CATEGORY_PATH']
+    ),
+    'BASKET' => array(
+        'ADD_PROPS' => $arParams['ADD_PROPERTIES_TO_BASKET'] === 'Y',
+        'QUANTITY' => $arParams['PRODUCT_QUANTITY_VARIABLE'],
+        'PROPS' => $arParams['PRODUCT_PROPS_VARIABLE'],
+        'EMPTY_PROPS' => $emptyProductProperties,
+        'BASKET_URL' => $arParams['BASKET_URL'],
+        'ADD_URL_TEMPLATE' => $arResult['~ADD_URL_TEMPLATE'],
+        'BUY_URL_TEMPLATE' => $arResult['~BUY_URL_TEMPLATE']
+    )
+);
+unset($emptyProductProperties);
+?>
 
     <script>
         BX.message({
