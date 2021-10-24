@@ -1,9 +1,11 @@
 .main_menu {
   list-style: none;
-  margin: 20px 0px;
+  margin: 15px 0px 0px 0px;
   padding: 0;
   text-align: center;
-
+  @media (max-width: 970px) {
+    margin-bottom: 20px;
+  }
   li {
     display: inline-block;
   }
@@ -12,7 +14,10 @@
     color: var(--color3);
     text-decoration: none;
     font-size: 18px;
-    padding: 5px 15px;
+    padding: 0px 15px;
+    @media (max-width: 970px) {
+      padding: 0px 10px;
+    }
     &:before {
       display: inline-block;
       content: '';

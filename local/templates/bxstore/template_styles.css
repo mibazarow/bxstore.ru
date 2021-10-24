@@ -22,40 +22,46 @@ a {
       max-width: 400px; } }
 
 .header {
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
+  @media (max-width: 970px) {
+    .header {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; } }
   .header_logo {
-    width: 117px; }
+    width: 117px;
+    padding-top: 15px; }
+    @media (max-width: 970px) {
+      .header_logo {
+        width: 60px;
+        padding-top: 10px; } }
     .header_logo a {
-      margin-top: 25px;
       display: block; }
     .header_logo img {
       width: 100%; }
   .header_content {
     width: calc(100% - 117px - 190px); }
+    @media (max-width: 970px) {
+      .header_content {
+        width: 100%; } }
     .header_content_slogan {
       font-family: 'Pacifico', cursive;
       color: var(--color1);
       font-size: 29px;
-      padding: 20px 0px;
+      padding: 30px 0px 10px 0px;
       display: block;
       text-align: center; }
+      @media (max-width: 970px) {
+        .header_content_slogan {
+          font-size: 18px;
+          padding: 0px 0px 15px 0px; } }
       .header_content_slogan i {
         color: var(--color2);
         font-style: normal; }
-  .header_cart {
-    width: 190px;
-    display: flex;
-    flex-direction: column; }
-    .header_cart_auth {
-      text-align: right;
-      color: var(--color4);
-      text-decoration: none;
-      font-size: 15px; }
-      .header_cart_auth svg {
-        position: relative;
-        bottom: -7px;
-        width: 25px;
-        height: 25px; }
+      @media (max-width: 970px) {
+        .header_content_slogan {
+          display: block; } }
 
 .content {
   background: #fff;
@@ -63,20 +69,44 @@ a {
   padding: 30px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 200px; }
+  margin-bottom: 90px;
+  flex-wrap: wrap; }
+  @media (max-width: 970px) {
+    .content {
+      padding: 15px;
+      margin-bottom: 30px; } }
+  .content p {
+    line-height: 28px; }
   .content_left {
     width: 300px;
-    height: 200px; }
+    height: 330px; }
+    @media (max-width: 970px) {
+      .content_left {
+        width: 100%;
+        height: auto; } }
     .content_left img {
       width: 100%;
       border-radius: var(--radius); }
   .content_right {
-    width: calc(100% - 330px); }
+    width: calc(100% - 330px);
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    @media (max-width: 970px) {
+      .content_right {
+        width: 100%;
+        height: auto;
+        order: -1; } }
   .content_socials {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex; }
+    display: flex;
+    width: 100%; }
+    @media (max-width: 970px) {
+      .content_socials {
+        flex-direction: column;
+        margin-bottom: 30px; } }
     .content_socials li:nth-child(1) {
       margin-right: 15px; }
     .content_socials a {
@@ -88,16 +118,59 @@ a {
       bottom: -8px;
       margin-right: 5px; }
   .content_main_page {
-    padding: 100px; }
+    padding: 0px 100px; }
+    @media (max-width: 970px) {
+      .content_main_page {
+        padding: 0px 0px; } }
+  .content_100w ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%; }
+    .content_100w ul a {
+      text-decoration: none; }
+    .content_100w ul svg {
+      width: 25px;
+      height: 25px;
+      position: relative;
+      bottom: -8px;
+      margin-right: 5px; }
+
+#conf {
+  width: 100%;
+  max-width: 600px; }
+  #conf ul {
+    margin: 0;
+    padding: 0px 0px 0px 15px; }
 
 .footer {
   background: #444;
   display: flex;
-  color: #888888;
-  padding: 30px; }
+  color: #999;
+  padding: 30px;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  @media (max-width: 970px) {
+    .footer {
+      padding: 30px 15px 80px 15px; } }
+  .footer a {
+    color: #ccc;
+    display: block;
+    text-decoration: none; }
   .footer_copies {
-    width: 40%; }
+    width: 50%; }
+    @media (max-width: 970px) {
+      .footer_copies {
+        width: 100%;
+        text-align: center; } }
   .footer_stat {
-    width: 40%; }
+    width: 50%;
+    text-align: right; }
+    @media (max-width: 970px) {
+      .footer_stat {
+        text-align: center;
+        width: 100%; } }
 
 /*# sourceMappingURL=template_styles.css.map */

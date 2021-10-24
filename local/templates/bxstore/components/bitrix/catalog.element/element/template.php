@@ -16,6 +16,7 @@ use Bitrix\Main\Localization\Loc;
 
 $this->setFrameMode(true);
 
+
 $templateLibrary = array('popup', 'fx');
 $currencyList = '';
 
@@ -94,52 +95,28 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
                 <? if (count($arResult["MORE_PHOTO"]) > 0) {
                     foreach ($arResult["MORE_PHOTO"] as $PHOTO) {
                         ?>
-                        <a href="#">
+                        <a href="<?= $PHOTO['SRC'] ?>" data-fancybox="images"
+                           data-caption="Купить <?= $arResult['NAME'] ?>">
                             <img src="<?= $PHOTO['SRC'] ?>" alt="<? echo $actualItem['NAME'] ?>">
                         </a>
                     <? }
                 } ?>
             </div>
             <div class="product_row_images_main" data-entity="images-container">
-                <img itemprop="image" src="<?= $arResult['DETAIL_PICTURE']['SRC'] ?>"
-                     alt="Купить <? echo $actualItem['NAME'] ?>">
+                <a href="<?= $arResult['DETAIL_PICTURE']['SRC'] ?>" data-fancybox="images"
+                   data-caption="Купить <?= $arResult['NAME'] ?>">
+                    <img itemprop="image" src="<?= $arResult['DETAIL_PICTURE']['SRC'] ?>"
+                         alt="Купить <? echo $actualItem['NAME'] ?>">
+                </a>
             </div>
         </div>
 
         <div class="product_row_content">
-            <h1><?=$arResult['NAME']?></h1>
-            <?
-            foreach ($arParams['PRODUCT_PAY_BLOCK_ORDER'] as $blockName) {
-                switch ($blockName) {
-                    case 'price':
-                        ?>
-                        <div class="product_row_content_price" id="<?= $itemIds['PRICE_ID'] ?>">
-                            <?
-                            foreach ($arResult['ITEM_PRICES'] as $ITEM_PRICE) {
-                                echo $ITEM_PRICE['PRINT_BASE_PRICE'];
-                            }
-                            ?>
-                        </div>
-                        <?php
-                        break;
-                    case 'buttons':
-                        ?>
-                        <div class="product_row_content_btn" data-entity="main-button-container">
-                            <div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>">
-                                <a id="<?= $itemIds['ADD_BASKET_LINK'] ?>" rel="nofollow" href="javascript:void(0);">
-                                    <?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?>
-                                </a>
-                            </div>
-                        </div>
-                        <?php
-                        break;
-                }
-            }
-            ?>
+            <h1><?= $arResult['NAME'] ?></h1>
             <ul class="product_row_content_props">
                 <? foreach ($arResult['DISPLAY_PROPERTIES'] as $PROPERTY) { ?>
                     <li>
-                        <?= $PROPERTY['NAME'] ?>:
+                        <strong><?= $PROPERTY['NAME'] ?>:</strong>
                         <? if (is_array($PROPERTY['VALUE'])) { ?>
                             <? echo implode(', ', $PROPERTY['VALUE']) ?>
                             <?
@@ -151,20 +128,79 @@ $arParams['MESS_RELATIVE_QUANTITY_FEW'] = $arParams['MESS_RELATIVE_QUANTITY_FEW'
                     <?
                 } ?>
             </ul>
+            <div class="product_row_content_actions">
+                <?
+                foreach ($arParams['PRODUCT_PAY_BLOCK_ORDER'] as $blockName) {
+                    switch ($blockName) {
+                        case 'price':
+                            ?>
+                            <div class="product_row_content_price" id="<?= $itemIds['PRICE_ID'] ?>">
+                                <?
+                                foreach ($arResult['ITEM_PRICES'] as $ITEM_PRICE) {
+                                    echo $ITEM_PRICE['PRINT_BASE_PRICE'];
+                                }
+                                ?>
+                            </div>
+                            <?php
+                            break;
+                        case 'buttons':
+                            ?>
+                            <div class="product_row_content_btn" data-entity="main-button-container">
+                                <div id="<?= $itemIds['BASKET_ACTIONS_ID'] ?>">
+                                    <a id="<?= $itemIds['ADD_BASKET_LINK'] ?>" rel="nofollow"
+                                       href="javascript:void(0);">
+                                        <?= $arParams['MESS_BTN_ADD_TO_BASKET'] ?>
+                                    </a>
+                                </div>
+                            </div>
+                            <?php
+                            break;
+                    }
+                }
+                ?>
+            </div>
+
         </div>
     </div>
 
 
+    <div class="prodict_profits">
+        <div class="prodict_profits_profit">
+            <svg>
+                <use xlink:href="#biodegradable"></use>
+            </svg>
+            <div class="prodict_profits_profit_txt">
+                <span>Экологически чисто</span>
+                Только натуральные материалы
+            </div>
+        </div>
+        <div class="prodict_profits_profit">
+            <svg>
+                <use xlink:href="#lamp"></use>
+            </svg>
+            <div class="prodict_profits_profit_txt">
+                <span>Сделано в ручную</span>
+                Кажое изделие уникально
+            </div>
+        </div>
+        <div class="prodict_profits_profit">
+            <svg>
+                <use xlink:href="#knitted"></use>
+            </svg>
+            <div class="prodict_profits_profit_txt">
+                <span>Идея под заказ</span>
+                Можно внести изменения
+            </div>
+        </div>
+    </div>
 
-<div class="prodict_profits">
-    <div class="prodict_profits_profit"></div>
-    <div class="prodict_profits_profit"></div>
-    <div class="prodict_profits_profit"></div>
-</div>
-
-    <div class="product_text">
+    <div class="content_main_page">
         <?= $arResult['DETAIL_TEXT'] ?>
     </div>
+
+
+
+<div class="product_info"></div>
 
 
     <meta itemprop="name" content="<?= $name ?>"/>

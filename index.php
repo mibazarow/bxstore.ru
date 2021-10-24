@@ -3,13 +3,12 @@ require($_SERVER["DOCUMENT_ROOT"] . "/bitrix/header.php");
 $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
 ?>
 
-
     <div class="content">
         <div class="content_left">
             <img src="<?= SITE_TEMPLATE_PATH ?>/img/i.jpg" alt="Я">
         </div>
         <div class="content_right">
-            <h1>Я делаю игрушки вручную из качественных, безопасных материалов.</h1>
+            <h1>Вязанные игрушки ручной работы, купить у мастера.</h1>
             <p>
                 Конкретная игрушка может незначительно отличаться- это естественное явление для любого «HandMade»
                 изделия,
@@ -18,7 +17,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
 
             <ul class="content_socials">
                 <li>
-                    <a href="" rel="nofollow">
+                    <a href="https://instagram.com/a_kutseva/" rel="nofollow" target="_blank">
                         <svg>
                             <use xlink:href="#instagram"></use>
                         </svg>
@@ -26,7 +25,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
                     </a>
                 </li>
                 <li>
-                    <a href="" rel="nofollow">
+                    <a href="https://vk.com/club80096689/" rel="nofollow" target="_blank">
                         <svg>
                             <use xlink:href="#vk"></use>
                         </svg>
@@ -38,8 +37,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"Одежда\"");
     </div>
 
 
-
-<?// Элементы раздела
+<? // Элементы раздела
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 
 	"section", 
@@ -52,7 +50,7 @@ $APPLICATION->IncludeComponent(
 			0 => "",
 			1 => "",
 		),
-		"ELEMENT_SORT_FIELD" => "sort",
+		"ELEMENT_SORT_FIELD" => "RAND",
 		"ELEMENT_SORT_ORDER" => "asc",
 		"ELEMENT_SORT_FIELD2" => "id",
 		"ELEMENT_SORT_ORDER2" => "desc",
@@ -65,13 +63,12 @@ $APPLICATION->IncludeComponent(
 		"PROPERTY_CODE" => array(
 			0 => "ATT_MATERIAL",
 			1 => "ATT_NAPOLNITEL",
-			2 => "ATT_FURNITURA",
-			3 => "",
+			2 => "",
 		),
 		"OFFERS_LIMIT" => "5",
-		"SECTION_URL" => "",
-		"DETAIL_URL" => "",
-		"SECTION_ID_VARIABLE" => "SECTION_ID",
+		"SECTION_URL" => "/catalog/#SECTION_CODE#/",
+		"DETAIL_URL" => "/catalog/#SECTION_CODE#/#ELEMENT_CODE#/",
+		"SECTION_ID_VARIABLE" => "SECTION_CODE",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
@@ -149,6 +146,7 @@ $APPLICATION->IncludeComponent(
 		"USE_ENHANCED_ECOMMERCE" => "N",
 		"PAGER_BASE_LINK_ENABLE" => "N",
 		"LAZY_LOAD" => "Y",
+		"BY_LINK" => "Y",
 		"MESS_BTN_LAZY_LOAD" => "Показать ещё",
 		"LOAD_ON_SCROLL" => "N",
 		"SHOW_404" => "N",
@@ -157,7 +155,7 @@ $APPLICATION->IncludeComponent(
 		"DISABLE_INIT_JS_IN_COMPONENT" => "N"
 	),
 	false
-);?>
+); ?>
 
     <!-- КАТАЛОГ -->
 

@@ -212,9 +212,7 @@ $APPLICATION->SetTitle("Игрушки");
 		),
 		"LIST_PROPERTY_CODE" => array(
 			0 => "ATT_MATERIAL",
-			1 => "ATT_NAPOLNITEL",
-			2 => "ATT_FURNITURA",
-			3 => "",
+			1 => "ATT_NAPOLNITEL"
 		),
 		"DETAIL_PROPERTY_CODE" => array(
 			0 => "ATT_MATERIAL",

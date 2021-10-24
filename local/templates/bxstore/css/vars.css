@@ -3,7 +3,9 @@
   --color2: #009CAE;
   --color3: #1C71B8;
   --color4: #ccc;
-  --radius: 26px; }
+  --radius: 26px;
+  --animation1: all .30s ease-out;
+  --box-shadow1: 0px 1px 9px rgba(0, 0, 0, 0.25); }
 
 /*
 

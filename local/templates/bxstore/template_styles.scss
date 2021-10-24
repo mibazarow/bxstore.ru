@@ -9,6 +9,7 @@ body {
   //font-family: 'Pacifico', cursive;
   font-family: 'PT Sans', sans-serif;
   font-size: 18px;
+
   color: #333333;
   background: #F9F9F9;
 }
@@ -30,12 +31,21 @@ a {
 // HEADER ===============
 .header {
   display: flex;
-
+flex-wrap: wrap;
+  @media (max-width: 970px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   &_logo {
     width: 117px;
-
+    padding-top: 15px;
+    @media (max-width: 970px) {
+      width: 60px;
+      padding-top: 10px;
+    }
     a {
-      margin-top: 25px;
+
       display: block;
     }
 
@@ -46,41 +56,30 @@ a {
 
   &_content {
     width: calc(100% - 117px - 190px);
-
+    @media (max-width: 970px) {
+      width: 100%;
+    }
     &_slogan {
       font-family: 'Pacifico', cursive;
       color: var(--color1);
       font-size: 29px;
-      padding: 20px 0px;
+      padding: 30px 0px 10px 0px;
       display: block;
       text-align: center;
-
+      @media (max-width: 970px) {
+        font-size: 18px;
+        padding: 0px 0px 15px 0px;
+      }
       i {
         color: var(--color2);
         font-style: normal;
       }
-    }
-  }
-
-  &_cart {
-    width: 190px;
-    display: flex;
-    flex-direction: column;
-
-    &_auth {
-      text-align: right;
-      color: var(--color4);
-      text-decoration: none;
-      font-size: 15px;
-
-      svg {
-        position: relative;
-        bottom: -7px;
-        width: 25px;
-        height: 25px;
+      @media (max-width: 970px) {
+        display: block;
       }
     }
   }
+
 
 }
 
@@ -92,10 +91,22 @@ a {
   padding: 30px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 200px;
+  margin-bottom: 90px;
+  flex-wrap: wrap;
+  @media (max-width: 970px) {
+    padding: 15px;
+    margin-bottom: 30px;
+  }
+  p {
+    line-height: 28px;
+  }
   &_left {
     width: 300px;
-    height: 200px;
+    height: 330px;
+    @media (max-width: 970px) {
+      width: 100%;
+      height: auto;
+    }
     img {
       width: 100%;
       border-radius: var(--radius);
@@ -104,13 +115,25 @@ a {
 
   &_right {
     width: calc(100% - 330px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 970px) {
+      width: 100%;
+      height: auto;
+      order: -1;
+    }
   }
   &_socials {
     list-style: none;
     margin: 0;
     padding: 0;
-    //justify-content: space-between;
-    display: flex;
+   display: flex;
+    width: 100%;
+    @media (max-width: 970px) {
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
     li {
       &:nth-child(1) {
         margin-right: 15px;
@@ -128,23 +151,83 @@ a {
     }
   }
   &_main_page {
-    padding: 100px;
+    padding: 0px 100px;
     h2 {}
+    @media (max-width: 970px) {
+      padding: 0px 0px;
+    }
+  }
+  &_100w {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      li {
+
+      }
+      a {
+        text-decoration: none;
+      }
+      svg {
+        width: 25px;
+        height: 25px;
+        position: relative;
+        bottom: -8px;
+        margin-right: 5px;
+      }
+    }
   }
 }
+
+
+
+//  FROM /confidencial sect
+#conf {
+  width: 100%;
+  max-width: 600px;
+  ul {
+    margin: 0;
+    padding: 0px 0px 0px 15px;
+  }
+}
+
+
+
 
 // FOOTER ===============
 .footer {
   background: #444;
   display: flex;
-  color: #888888;
+  color: #999;
   padding: 30px;
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  @media (max-width: 970px) {
 
+    padding: 30px 15px 80px 15px;
+  }
+  a {
+    color: #ccc;
+    display: block;
+    text-decoration: none;
+  }
   &_copies {
-    width: 40%;
+    width: 50%;
+    @media (max-width: 970px) {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &_stat {
-    width: 40%;
+    width: 50%;
+    text-align: right;
+    @media (max-width: 970px) {
+      text-align: center;
+      width: 100%;
+    }
   }
 }

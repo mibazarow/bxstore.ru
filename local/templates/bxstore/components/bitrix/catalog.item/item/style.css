@@ -4,25 +4,45 @@
   background: #fff;
   margin-bottom: 30px;
   text-decoration: none;
-  display: block; }
+  display: block;
+  transition: var(--animation1); }
   .catalog_item_element img {
     width: 100%;
-    border-radius: var(--radius); }
+    border-radius: var(--radius);
+    margin-bottom: 15px; }
   .catalog_item_element strong {
     display: block;
-    padding: 15px 0px; }
+    padding: 0px 15px;
+    height: 50px;
+    line-height: 23px; }
+    @media (max-width: 970px) {
+      .catalog_item_element strong {
+        height: auto; } }
   .catalog_item_element span {
     font-size: 32px;
+    display: block;
     font-weight: bold;
+    padding: 15px 15px 10px 15px;
     color: #333333; }
+    @media (max-width: 970px) {
+      .catalog_item_element span {
+        font-style: 21px; } }
   .catalog_item_element ul {
-    color: #666666;
+    color: #777;
     list-style: none;
     margin: 0;
-    padding: 0;
-    font-size: 14px; }
+    padding: 0px 15px;
+    font-size: 14px;
+    min-height: 60px;
+    line-height: 20px; }
+    .catalog_item_element ul li {
+      text-transform: lowercase; }
+      .catalog_item_element ul li:first-letter {
+        text-transform: uppercase; }
     .catalog_item_element ul i {
       font-style: normal;
-      color: #444444; }
+      color: #333; }
+  .catalog_item_element:hover {
+    box-shadow: var(--box-shadow1); }
 
 /*# sourceMappingURL=style.css.map */

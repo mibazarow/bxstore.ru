@@ -1,15 +1,21 @@
 .main_menu {
   list-style: none;
-  margin: 20px 0px;
+  margin: 15px 0px 0px 0px;
   padding: 0;
   text-align: center; }
+  @media (max-width: 970px) {
+    .main_menu {
+      margin-bottom: 20px; } }
   .main_menu li {
     display: inline-block; }
   .main_menu a {
     color: var(--color3);
     text-decoration: none;
     font-size: 18px;
-    padding: 5px 15px; }
+    padding: 0px 15px; }
+    @media (max-width: 970px) {
+      .main_menu a {
+        padding: 0px 10px; } }
     .main_menu a:before {
       display: inline-block;
       content: '';

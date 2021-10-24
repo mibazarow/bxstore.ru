@@ -1,0 +1,42 @@
+.feed_form {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 30px;
+
+  strong {
+    display: block;
+  }
+
+  input, textarea {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 62px;
+    border: 2px solid #f6f6f6;
+    padding: 0px 15px;
+    border-radius: 10px;
+
+    &[type="submit"] {
+      border: none;
+      background: var(--color3);
+      color: #ffffff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: var(--animation1);
+
+      &:hover {
+
+        background: var(--color1);
+      }
+    }
+  }
+
+  textarea {
+    padding: 15px;
+    height: 200px;
+  }
+}
+
+.mf-ok-text {
+  color: forestgreen;
+}

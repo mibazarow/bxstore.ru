@@ -1,0 +1,31 @@
+.feed_form {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 30px; }
+  .feed_form strong {
+    display: block; }
+  .feed_form input, .feed_form textarea {
+    margin-top: 15px;
+    margin-bottom: 30px;
+    width: 100%;
+    height: 62px;
+    border: 2px solid #f6f6f6;
+    padding: 0px 15px;
+    border-radius: 10px; }
+    .feed_form input[type="submit"], .feed_form textarea[type="submit"] {
+      border: none;
+      background: var(--color3);
+      color: #ffffff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: var(--animation1); }
+      .feed_form input[type="submit"]:hover, .feed_form textarea[type="submit"]:hover {
+        background: var(--color1); }
+  .feed_form textarea {
+    padding: 15px;
+    height: 200px; }
+
+.mf-ok-text {
+  color: forestgreen; }
+
+/*# sourceMappingURL=style.css.map */

@@ -5,5 +5,26 @@
   .catalog_row_item {
     width: 33.3333333333%;
     padding: 0px 15px; }
+    @media (max-width: 970px) {
+      .catalog_row_item {
+        width: 100%; } }
+
+.show_more {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px; }
+  .show_more button {
+    height: 55px;
+    background: var(--color3);
+    color: #ffffff;
+    border: none;
+    width: 200px;
+    font-size: 16px;
+    text-transform: uppercase;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--animation1); }
+    .show_more button:hover {
+      background: var(--color1); }
 
 /*# sourceMappingURL=style.css.map */

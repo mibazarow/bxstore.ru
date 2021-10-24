@@ -215,7 +215,7 @@ $containerName = 'container-'.$navParams['NavNum'];
 		if ($showLazyLoad)
 		{
 			?>
-			<div class="text-center mb-4" data-entity="lazy-<?=$containerName?>">
+			<div class="show_more" data-entity="lazy-<?=$containerName?>">
 				<button type="button" data-use="show-more-<?=$navParams['NavNum']?>">
                     <?=$arParams['MESS_BTN_LAZY_LOAD']?>
 				</button>

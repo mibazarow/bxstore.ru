@@ -1,5 +1,4 @@
 <? if (!defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) die();
-
 use \Bitrix\Main;
 $this->setFrameMode(true);
 ?>
@@ -19,10 +18,10 @@ $this->setFrameMode(true);
             <li>
                 <i><?= $PROPERTY['NAME'] ?>:</i>
                 <? if (is_array($PROPERTY['VALUE'])) { ?>
-                    <? echo implode(', ', $PROPERTY['VALUE']) ?>
+                    <? echo implode(', ', TruncateText($PROPERTY['VALUE'], 11)) ?>
                     <?
                 } else { ?>
-                    <?= $PROPERTY['VALUE'] ?>
+                    <? echo TruncateText($PROPERTY['VALUE'], 11); ?>
                     <?
                 } ?>
             </li>

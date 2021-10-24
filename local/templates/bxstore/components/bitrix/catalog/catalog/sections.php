@@ -23,6 +23,40 @@ if (isset($arParams['USE_COMMON_SETTINGS_BASKET_POPUP']) && $arParams['USE_COMMO
 	$basketAction = isset($arParams['SECTION_ADD_TO_BASKET_ACTION']) ? $arParams['SECTION_ADD_TO_BASKET_ACTION'] : '';
 }
 ?>
+<div class="content">
+    <div class="content_left">
+        <img src="<?= SITE_TEMPLATE_PATH ?>/img/i.jpg" alt="Я">
+    </div>
+    <div class="content_right">
+        <h1>Вязанные игрушки ручной работы, купить у мастера.</h1>
+        <p>
+            Конкретная игрушка может незначительно отличаться- это естественное явление для любого «HandMade»
+            изделия,
+            ведь все мы немного разные, каждый привносит в работу частичку своей души.
+        </p>
+
+        <ul class="content_socials">
+            <li>
+                <a href="https://instagram.com/a_kutseva/" rel="nofollow" target="_blank">
+                    <svg>
+                        <use xlink:href="#instagram"></use>
+                    </svg>
+                    instagram.com/a_kutseva/
+                </a>
+            </li>
+            <li>
+                <a href="https://vk.com/club80096689/" rel="nofollow" target="_blank">
+                    <svg>
+                        <use xlink:href="#vk"></use>
+                    </svg>
+                    vk.com/club80096689
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
 
 
 <?
