@@ -149,7 +149,6 @@ a {
   color: #999;
   padding: 30px;
   margin-top: 50px;
-  display: flex;
   flex-wrap: wrap;
   justify-content: space-between; }
   @media (max-width: 970px) {

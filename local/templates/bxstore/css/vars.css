@@ -7,6 +7,13 @@
   --animation1: all .30s ease-out;
   --box-shadow1: 0px 1px 9px rgba(0, 0, 0, 0.25); }
 
+.hidden {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  left: -99999px; }
+
 /*
 
 

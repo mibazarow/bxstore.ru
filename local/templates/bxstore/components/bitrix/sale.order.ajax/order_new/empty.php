@@ -2,19 +2,19 @@
 
 use Bitrix\Main\Localization\Loc;
 ?>
-11
-<div class="bx-sbb-empty-cart-container">
-	<div class="bx-sbb-empty-cart-image">
+
+<div class="bx-soa-empty-cart-container">
+	<div class="bx-soa-empty-cart-image">
 		<img src="" alt="">
 	</div>
-	<div class="bx-sbb-empty-cart-text"><?=Loc::getMessage("SBB_EMPTY_BASKET_TITLE")?></div>
+	<div class="bx-soa-empty-cart-text"><?=Loc::getMessage("EMPTY_BASKET_TITLE")?></div>
 	<?
 	if (!empty($arParams['EMPTY_BASKET_HINT_PATH']))
 	{
 		?>
-		<div class="bx-sbb-empty-cart-desc">
+		<div class="bx-soa-empty-cart-desc">
 			<?=Loc::getMessage(
-				'SBB_EMPTY_BASKET_HINT',
+				'EMPTY_BASKET_HINT',
 				[
 					'#A1#' => '<a href="'.$arParams['EMPTY_BASKET_HINT_PATH'].'">',
 					'#A2#' => '</a>',
